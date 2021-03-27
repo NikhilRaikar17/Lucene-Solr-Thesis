@@ -2,6 +2,7 @@ import urllib.request
 import simplejson
 import chardet
 import pandas as pd
+from sklearn import metrics
 from sklearn.feature_extraction.text import TfidfVectorizer
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
@@ -89,7 +90,8 @@ def perform_clustering(corpus,X):
     labels=model.labels_
     cluster_data=pd.DataFrame(list(zip(corpus,labels)),columns=['Title','cluster'])
     # print(cluster_data.sort_values(by=['cluster']))
-    plot_results(cluster_data,corpus,labels,int(true_k))
+    # plot_results(cluster_data,corpus,labels,int(true_k))
+    validate_results(cluster_data)
 
 # Plots results of clustering, uses wordcloud module to better visualise the result
 def plot_results(cluster_data,corpus,labels,true_k):
@@ -112,6 +114,25 @@ def plot_results(cluster_data,corpus,labels,true_k):
         plt.imshow(wordcloud, interpolation="bilinear")
         plt.axis("off")
         plt.show()
+
+def validate_results(cluster_data):
+    primary_data = []
+    true_value = []
+    predicted_value = []
+    file_name = 'results.csv'
+    df = pd.read_csv(file_name,encoding='mac_roman')
+    data=df.iloc[:,0:3]
+    for index,row in data.iterrows():
+        for index,row_ in cluster_data.iterrows():
+            if row_["Title"] == row["Title"] and row["primary"] == 1:
+                true_value.append(int(row["primary"]))
+                predicted_value.append(row_["cluster"])
+                print(row_["Title"],row_["cluster"])
+    
+    print(true_value)
+    print(predicted_value)
+    print(metrics.rand_score(true_value, predicted_value))
+            
 
 
 if __name__ == "__main__":
