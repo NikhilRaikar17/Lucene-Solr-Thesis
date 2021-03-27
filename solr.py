@@ -116,23 +116,26 @@ def plot_results(cluster_data,corpus,labels,true_k):
         plt.show()
 
 def validate_results(cluster_data):
-    primary_data = []
-    true_value = []
-    predicted_value = []
-    file_name = 'results.csv'
-    df = pd.read_csv(file_name,encoding='mac_roman')
-    data=df.iloc[:,0:3]
-    for index,row in data.iterrows():
-        for index,row_ in cluster_data.iterrows():
-            if row_["Title"] == row["Title"] and row["primary"] == 1:
-                true_value.append(int(row["primary"]))
-                predicted_value.append(row_["cluster"])
-                print(row_["Title"],row_["cluster"])
-    
-    print(true_value)
-    print(predicted_value)
-    print(metrics.rand_score(true_value, predicted_value))
-            
+    files = ['results_1.csv','results_2.csv','results_3.csv','results_4.csv','results_5.csv','results_7.csv','results_8.csv','results_9.csv','results_10.csv']
+    for file_name in files:
+        true_value = []
+        predicted_value = []
+        df = pd.read_csv(file_name,encoding='mac_roman')
+        data=df.iloc[:,0:3]
+        for index,row in data.iterrows():
+            for index,row_ in cluster_data.iterrows():
+                if row_["Title"] == row["Lit_title"] and row["primary"] == 1:
+                    true_value.append(int(row["primary"]))
+                    predicted_value.append(row_["cluster"])
+                    print(row_["Title"],row_["cluster"])
+        print(file_name)
+        print(true_value)
+        print(predicted_value)
+        print("Rand Score:",metrics.rand_score(true_value, predicted_value))
+        print("Mallows Score:",metrics.fowlkes_mallows_score(true_value, predicted_value))
+        print("")
+        print("")
+        print("")
 
 
 if __name__ == "__main__":
