@@ -18,8 +18,8 @@ import sys
 pybtex.errors.set_strict_mode(False)
 
 
-FILE_NAME = 'results_2.csv'
-BIB_FILE = 'scopus_2.bib'
+FILE_NAME = 'results_4.csv'
+BIB_FILE = 'scopus_4.bib'
 
 cluster_on = input("Cluster based on : \n 1. title \n 2. abstract \n 3. both \n  Enter a value: ")
 to_cluster_input = int(cluster_on)
@@ -123,6 +123,7 @@ def clustering():
     elif to_cluster_input == 2:
         abstract = extract_titles()
         Y = vectorizer.fit_transform(abstract)
+        title = abstract
         normalised_column_data = Y
         both_columns = False
     else:
@@ -150,7 +151,7 @@ def clustering():
             Sum_of_squared_distances.append(km.inertia_)
 
         plot_graphs(K,Sum_of_squared_distances)
-        perform_clustering(title=abstract,X=normalised_column_data)
+        perform_clustering(title,X=normalised_column_data)
     
 # Performs elbow method and plots graphs
 def plot_graphs(K,Sum_of_squared_distances):
@@ -206,12 +207,27 @@ def validate_results(cluster_data):
     predicted_value = []
     df = pd.read_csv(file_name,encoding='mac_roman')
     data=df.iloc[:,0:3]
-    for index,row in data.iterrows():
-        for index,row_ in cluster_data.iterrows():
-            if row_["Title"] == row["Lit_title"] and row["primary"] == 1:
+
+    if to_cluster_input!=2:
+        for index,row in data.iterrows():
+            for index,row_ in cluster_data.iterrows():
+                if row_["Title"] == row["Lit_title"] and row["primary"] == 1:
+                    true_value.append(int(row["primary"]))
+                    predicted_value.append(row_["cluster"])
+                    # print(row_["Title"],row_["cluster"])
+    else:
+        bib_file = BIB_FILE
+        parser = bibtex.Parser()
+        bib_data = parser.parse_file(bib_file)
+        for index,row in data.iterrows():
+            if row["primary"] == 1:
                 true_value.append(int(row["primary"]))
-                predicted_value.append(row_["cluster"])
-                # print(row_["Title"],row_["cluster"])
+                actual_title = row['Lit_title']
+                for entry in bib_data.entries.values():
+                    if actual_title == entry.fields['Title']:
+                        for index,row_ in cluster_data.iterrows():
+                            if 'Abstract' in list(entry.fields.keys()) and row_["Title"]==entry.fields['Abstract']:
+                                predicted_value.append(row_["cluster"])
     print(file_name)
     if len(true_value) > 0 or len(predicted_value)>0: 
         print("Primary:", true_value)
@@ -225,4 +241,3 @@ def validate_results(cluster_data):
 
 if __name__ == "__main__":
     clustering()
-    
