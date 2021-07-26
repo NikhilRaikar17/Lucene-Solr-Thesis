@@ -228,7 +228,7 @@ def validate_results(cluster_data):
                         for index,row_ in cluster_data.iterrows():
                             if 'Abstract' in list(entry.fields.keys()) and row_["Title"]==entry.fields['Abstract']:
                                 predicted_value.append(row_["cluster"])
-    print(file_name)
+                                
     if len(true_value) > 0 or len(predicted_value)>0: 
         print("Primary:", true_value)
         print("Cluster_predicted", predicted_value)

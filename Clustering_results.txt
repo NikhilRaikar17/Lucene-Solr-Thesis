@@ -1,0 +1,73 @@
+
+No of clusters: 2
+File: File > Evaluationslr > 1 >results.csv >> renamed >> results_1.csv
+Clustering based on titles,abstracts and both "title and abstracts"
+Primary: Cluster of articles which are supposed to be grouped together and in the same clusters
+Cluster_predicted: The same articles which are in primary are checked whether they fall in same cluster or not.
+Evaluation tools: Rand Score(Inter and intra cluster distances), Mallows Score  
+------------------------------------------------------------------------------------
+On titles
+Details:
+    results_1.csv
+    Primary: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    Cluster_predicted [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
+    Rand Score: 0.8333333333333334
+    Mallows Score: 0.9128709291752769
+
+    results_2.csv
+    Primary: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    Cluster_predicted [1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1]
+    Rand Score: 0.48
+    Mallows Score: 0.6928203230275509
+
+    results_4.csv
+    Primary: [1, 1, 1, 1, 1, 1, 1, 1, 1]
+    Cluster_predicted [1, 1, 0, 0, 0, 0, 1, 1, 1]
+    Rand Score: 0.4444444444444444
+    Mallows Score: 0.6666666666666666
+------------------------------------------------------------------------------------
+On Abstracts
+Details:
+    results_1.csv
+    Primary: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    Cluster_predicted [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1]
+    Rand Score: 0.8333333333333334
+    Mallows Score: 0.9128709291752769
+
+    results_2.csv
+    Primary: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    Cluster_predicted [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    Rand Score: 1.0
+    Mallows Score: 1.0
+
+    results_4.csv
+    Primary: [1, 1, 1, 1, 1, 1, 1, 1, 1]
+    Cluster_predicted [1, 1, 1, 1, 1, 0, 0, 1, 0]
+    Rand Score: 0.5
+    Mallows Score: 0.7071067811865476
+------------------------------------------------------------------------------------
+On Both
+Details:
+    results_1.csv
+    Primary: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    Cluster_predicted [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    Rand Score: 1.0
+    Mallows Score: 1.0
+
+    results_2.csv
+    Primary: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    Cluster_predicted [1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0]
+    Rand Score: 0.48
+    Mallows Score: 0.6928203230275509
+
+    results_4.csv
+    Primary: [1, 1, 1, 1, 1, 1, 1, 1, 1]
+    Cluster_predicted [1, 0, 0, 1, 0, 0, 0, 0, 0]
+    Rand Score: 0.6111111111111112
+    Mallows Score: 0.7817359599705717
+------------------------------------------------------------------------------------
+
+
+
+
+
